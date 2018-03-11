@@ -1,0 +1,41 @@
+﻿[{
+	"text":"功能1",
+	"id":100,
+	"children":[{
+		"id":110,
+		"text":"菜单1",
+		"children":[{
+			"id":111,
+			"text":"菜单110",
+			"url":"./pages/index.html"
+		},{
+			"id":112,
+			"text":"菜单120",
+			"url":"./pages/index.html"
+		}]
+	},{
+		"id":120,
+		"text":"菜单2",
+		"children":[{
+			"id":121,
+			"text":"菜单210",
+			"url":"./pages/index.html"
+		}]
+	}]
+},{
+	"text":"功能2",
+	"id":200,
+	"children":[{
+		"id":210,
+		"text":"菜单1",
+		"children":[{
+			"id":211,
+			"text":"菜单110",
+			"url":"./pages/index.html"
+		},{
+			"id":212,
+			"text":"菜单120",
+			"url":"./pages/index.html"
+		}]
+	}]
+}]

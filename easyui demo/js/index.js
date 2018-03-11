@@ -1,0 +1,68 @@
+﻿$(function(){
+	$("#menu").accordion({
+		border:false,
+		onSelect:function(title,index){
+			var menus = $('#menu').accordion('getSelected');
+			if (menus){
+				$.ajax({
+					url:'./data/menu.json',
+					type:'GET',
+					dataType:'json',
+					success:function(data){
+						if(data){
+							$.each(data, function(index, item){
+								if(item.id==menus[0].id){
+									$("#tree"+menus[0].id).tree({
+										data:item.children,
+										style:{paddingLeft:20,paddingTop:10,paddingBottom:10},
+										animate:true,
+										onClick:function(node){
+											if($("#tabs").tabs('exists',node.text)){
+												$('#tabs').tabs('select',node.text);
+											}else{
+												$("#tabs").tabs('add',{
+													title:node.text,
+													href:node.url,
+													closable:true,
+													selected:true
+												});
+											}
+										}
+									});
+								}
+							});
+						}else{
+							$.messager.alert("错误","获取菜单失败","error");
+						}
+					},
+					error:function(){
+						$.messager.alert("错误","请求菜单失败","error");
+					}
+				});
+			}
+		}
+	});
+	$.ajax({
+		url:'./data/menu.json',
+		type:'GET',
+		dataType:'json',
+		success:function(data){
+			if(data){
+				$.each(data, function(index, item){
+					$("#menu").accordion("add",{
+						id:item.id,
+						title:item.text,
+						selected:false,
+						content:"<ul id='tree"+item.id+"' style='margin:10px 0px;'></ul>"
+					});
+					$("#menu").accordion("select",0);
+				});
+			}else{
+				$.messager.alert("错误","获取菜单失败","error");
+			}
+		},
+		error:function(){
+			$.messager.alert("错误","请求菜单失败","error");
+		}
+	});
+});
